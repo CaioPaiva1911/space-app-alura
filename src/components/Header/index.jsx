@@ -1,4 +1,6 @@
 import { styled } from "styled-components"
+import TextInput from '../TextInput'
+
 
 const HeaderStyled = styled.header`
     padding: 60px 0;
@@ -12,6 +14,7 @@ const HeaderStyled = styled.header`
 const Header = () => {
     return (<HeaderStyled>
         <img src="images/logo.png" alt="Logo" />
+        <TextInput />
     </HeaderStyled>)
 }
 
