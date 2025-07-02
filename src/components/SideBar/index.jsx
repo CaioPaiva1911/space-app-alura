@@ -8,7 +8,7 @@ const StyledList = styled.ul`
     width: 212px;
 `;
 
-const SideBar = () => {
+const SideBar = () => { 
     return (
         <aside>
             <nav>
