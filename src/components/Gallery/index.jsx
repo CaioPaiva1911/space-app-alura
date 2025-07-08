@@ -2,25 +2,39 @@ import styled from "styled-components";
 import Title from "../Title";
 import Popular from "./Popular";
 import Tags from "./Tags";
+import Image from "./Image";
 
 
 const GalleryContainer = styled.div`
     display: flex;
+    gap: 24px;
 `
+
 const FluidSection = styled.section`
     flex-grow: 1;
 `
 
-const Gallery = ({ photos = [] }) => {
+const ContainerImages = styled.section`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+`
+
+const Gallery = ({ photos = [], onSelectedPhoto }) => {
     return (
         <>
             <Tags />
             <GalleryContainer>
                 <FluidSection>
                     <Title>Navegue pela galeria</Title>
-                    <ul>
-                        {photos.map( photo => <li>{photo.path}</li>)}
-                    </ul>
+                    <ContainerImages>
+                        {photos.map(photo => <Image
+                            onZoomCalled={onSelectedPhoto}
+                            key={photo.id}
+                            photo={photo} />)
+                        }
+                    </ContainerImages>
                 </FluidSection>
                 <Popular />
             </GalleryContainer>
@@ -28,4 +42,4 @@ const Gallery = ({ photos = [] }) => {
     )
 }
 
-export default Gallery;
+export default Gallery

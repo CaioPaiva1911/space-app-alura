@@ -8,6 +8,7 @@ import Gallery from "./components/Gallery"
 
 import pictures from "./fotos.json"
 import { useState } from "react"
+import ModalZoom from "./components/ModalZoom"
 
 const GradientBackground = styled.div`
 background: linear-gradient(174.61deg, #041833 4.16%, #04244F 48%, #154580 96.76%);
@@ -33,6 +34,7 @@ const GalleryContent = styled.section`
 
 const App = () => {
   const[picturesFromGallery, setPicturesFromGallery] = useState(pictures)
+  const[selectedPhoto, setSelectedPhoto] = useState(pictures[0])
 
   return (
     <GradientBackground>
@@ -46,10 +48,17 @@ const App = () => {
               texto="The most completed galary of space!"
               backgroundImage={bannerBackground}
             />
-            <Gallery photos={picturesFromGallery} />
+            <Gallery 
+              onSelectedPhoto={photo =>  setSelectedPhoto(photo)}
+              photos={picturesFromGallery} 
+            />
           </GalleryContent>
         </MainContainer>
       </AppContainer>
+      <ModalZoom 
+        photo={selectedPhoto}
+        onClose={() => setSelectedPhoto(null)}  
+      />
     </GradientBackground>
   )
 }
