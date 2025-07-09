@@ -17,16 +17,8 @@ const StyledDialog = styled.dialog`
     background: transparent;
     padding: 0;
     border: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 1156px;
     display: flex;
-    max-width: 800px;
-    background-color: #001634;
-    border: none;
-    border-radius: 20px;
-    padding: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     justify-content: center;
     form {
         button {
@@ -37,13 +29,13 @@ const StyledDialog = styled.dialog`
     }
 `
 
-const ModalZoom = ({ photo, onClose }) => {
+const ModalZoom = ({ photo, onClose, onChangeFavorite }) => {
     return (
         <>
             {photo && <>
                 <Overlay />
                 <StyledDialog open={!!photo} onClose={onClose}>
-                    <Image photo={photo} expanded={true}/>
+                    <Image photo={photo} expanded={true} onChangeFavorite={onChangeFavorite} />
                     <form method="dialog">
                         <IconButton formMethod="dialog">
                             <img src="/icones/fechar.png" alt="Icone de fechar" />
