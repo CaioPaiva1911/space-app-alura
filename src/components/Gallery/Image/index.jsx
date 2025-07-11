@@ -40,7 +40,6 @@ const Image = ({ photo, expanded = false, onZoomCalled, onChangeFavorite }) => {
 
     const iconFavorite = photo.favorita ? '/icones/favorito-ativo.png' : '/icones/favorito.png'
 
-    
     return (<Figure $expanded={expanded} id={`foto-${photo.id}`}>
         <img src={photo.path} alt={photo.alt} />
         <figcaption>

@@ -30,12 +30,12 @@ const SearchIcon = styled.img`
     pointer-events: none;
 `;
 
-const TextInput = () => {
+const TextInput = ( setFilter ) => {
+    //TODO: implemente the filter functionality
     return (
         <StyledContainer>
-            <TextInputStyled placeholder="How can we help you?" />
+            <TextInputStyled onChange={(event) => { setFilter(event.target.value) }} type="text" placeholder="How can we help you?" />
             <SearchIcon src={search} alt="search icon" />
-            
         </StyledContainer>
     )
 }

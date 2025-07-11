@@ -7,8 +7,9 @@ import bannerBackground from "./assets/banner.png"
 import Gallery from "./components/Gallery"
 
 import pictures from "./fotos.json"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalZoom from "./components/ModalZoom"
+import Footer from "./components/Footer"
 
 const GradientBackground = styled.div`
 background: linear-gradient(174.61deg, #041833 4.16%, #04244F 48%, #154580 96.76%);
@@ -33,8 +34,19 @@ const GalleryContent = styled.section`
 `
 
 const App = () => {
-  const[picturesFromGallery, setPicturesFromGallery] = useState(pictures)
-  const[selectedPhoto, setSelectedPhoto] = useState(null)
+  const [picturesFromGallery, setPicturesFromGallery] = useState(pictures)
+  const [selectedPhoto, setSelectedPhoto] = useState(null)
+  const [filter, setFilter] = useState('')
+  const [tag, setTag] = useState(0)
+
+  useEffect(() => {
+    const filteredPhotos = pictures.filter(picture => {
+      const filterByTag = !tag || picture.tagId === tag;
+      const filterByTitle = !filter || picture.titulo.toLowerCase().includes(filter.toLowerCase())
+      return filterByTag && filterByTitle
+    })
+    setPicturesFromGallery(filteredPhotos)
+  }, [filter, tag])
 
   const onChangeFavorite = (photo) => {
     if(photo.id === selectedPhoto?.id) {
@@ -55,7 +67,10 @@ const App = () => {
     <GradientBackground>
       <GlobalStyles />
       <AppContainer>
-        <Header />
+        <Header 
+          filter={filter}
+          setFilter={setFilter}
+        />
         <MainContainer>
           <SideBar />
           <GalleryContent>
@@ -63,10 +78,11 @@ const App = () => {
               texto="The most completed galary of space!"
               backgroundImage={bannerBackground}
             />
-            <Gallery 
+            <Gallery
+              photos={picturesFromGallery} 
               onSelectedPhoto={photo =>  setSelectedPhoto(photo)}
               onChangeFavorite={onChangeFavorite}
-              photos={picturesFromGallery} 
+              setTag={setTag}
             />
           </GalleryContent>
         </MainContainer>
@@ -76,6 +92,7 @@ const App = () => {
         onClose={() => setSelectedPhoto(null)} 
         onChangeFavorite={onChangeFavorite} 
       />
+      <Footer />
     </GradientBackground>
   )
 }

@@ -23,6 +23,8 @@ const Tag = styled.button`
     transition: background-color 0.3s ease;
     padding: 12px;
     box-sizing: border-box;
+    border-radius: 10px;
+    border-color: transparent;
     border: 2px solid transparent;
     &:hover {
       border-color: #C98CF1;
@@ -35,13 +37,13 @@ const Div = styled.div`
     justify-content: end;
 `
 
-const Tags = () => {
+const Tags = ({ setTag }) => {
     return <TagContainer>
         <TagTitulo>Busque por tags:</TagTitulo>
         <Div>
-            {tags.map(tag => <Tag key={tag.id}>{tag.titulo}</Tag>)}
+            {tags.map(tag => <Tag key={tag.id} onClick={() => setTag(tag.tag)}>{tag.titulo}</Tag>)}
         </Div>
     </TagContainer>
 }
 
-export default Tags;
+export default Tags

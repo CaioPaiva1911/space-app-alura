@@ -21,10 +21,10 @@ const ContainerImages = styled.section`
     gap: 24px;
 `
 
-const Gallery = ({ photos = [], onSelectedPhoto, onChangeFavorite }) => {
+const Gallery = ({ photos = [], setTag, onSelectedPhoto, onChangeFavorite }) => {
     return (
         <>
-            <Tags />
+            <Tags setTag={setTag} />
             <GalleryContainer>
                 <FluidSection>
                     <Title>Navegue pela galeria</Title>
